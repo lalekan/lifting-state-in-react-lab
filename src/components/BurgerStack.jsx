@@ -1,24 +1,25 @@
+import Ingredient from './Ingredient';
 
-const BurgerStack = ({ingredients}) => {
-
-    
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     props.addIngredient(burgerStack);
-        
-    // }
-
-    console.log(ingredients, 'INGREDIENTS IN BURGER STACK')
-
-    return(
-        <div>
-            <h2>Burger Stacker</h2>
-            {ingredients.map((ingredient, index) => {
-                <ul key={index}>{ingredient.name} with the color {ingredient.color}</ul>
-            })}
-        </div>
-        
-    )
+function BurgerStack({ stack, removeFromBurger }) {
+  return (
+    <div className="burger-stack-section">
+      <h2 className="section-title">Your Burger Stack</h2>
+      <ul className="burger-stack">
+        {stack.length === 0 ? (
+          <p className="empty-message">No Ingredients</p>
+        ) : (
+          stack.map((ingredient, index) => (
+            <Ingredient
+              key={index}
+              ingredient={ingredient}
+              handleClick={() => removeFromBurger(index)}
+              isAddButton={false}
+            />
+          ))
+        )}
+      </ul>
+    </div>
+  );
 }
 
- export default BurgerStack
+export default BurgerStack;

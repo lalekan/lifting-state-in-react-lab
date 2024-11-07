@@ -1,10 +1,7 @@
-import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import IngredientList from './components/IngredientList.jsx'
-import BurgerStack from './components/BurgerStack.jsx'
-//import BurgerStack from './components/BurgerStack.jsx'
+import { useState } from 'react';
+import './App.css';
+import IngredientList from './components/IngredientList.jsx';
+import BurgerStack from './components/BurgerStack.jsx';
 
 export const availableIngredients = [
   { name: 'Kaiser Bun', color: 'saddlebrown' },
@@ -23,35 +20,32 @@ export const availableIngredients = [
   { name: 'Swiss Cheese', color: '#F1E1A8' },
 ];
 
-
 const App = () => {
+  const [stack, setStack] = useState([]);
 
-  
-  const [ingredients, setIngredients] = useState([])
+  const addToBurger = (ingredient) => {
+    setStack([...stack, ingredient]);
+  };
 
-  useEffect(() => {
-    setIngredients(availableIngredients)
-  }, [availableIngredients])
+  const removeFromBurger = (index) => {
+    setStack(stack.filter((_, i) => i !== index));
+  };
 
-  console.log(ingredients, "INGREDIENTS!!!")
-
-
-  
   return (
-
-    <main>
-      <h1>Burger Stacker</h1>
-      <section>
-          <div> 
-            <IngredientList
-              ingredients={ingredients}
-              />
-            <BurgerStack ingredients={ingredients} />
-          </div>        
+    <main className='burger-app'>
+      <h1 className='title'>Burger Stacker</h1>
+      <section className='content-container'>
+        <IngredientList 
+          ingredients={availableIngredients} 
+          addToBurger={addToBurger} 
+        />
+        <BurgerStack 
+          stack={stack} 
+          removeFromBurger={removeFromBurger} 
+        />
       </section>
     </main>
   );
 };
 
-
-export default App
+export default App;
