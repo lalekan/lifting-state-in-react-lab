@@ -35,14 +35,18 @@ const App = () => {
     <main className='burger-app'>
       <h1 className='title'>Burger Stacker</h1>
       <section className='content-container'>
+        <div>
         <IngredientList 
           ingredients={availableIngredients} 
           addToBurger={addToBurger} 
         />
+        </div>
+        <div>
         <BurgerStack 
           stack={stack} 
           removeFromBurger={removeFromBurger} 
         />
+        </div>
       </section>
     </main>
   );
